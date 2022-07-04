@@ -60,7 +60,7 @@ export class UserService {
   // }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/userssss`)
+    return this.http.get<User[]>(`${this.apiUrl}/users`)
     .pipe(
       // catchError((error: any)=>{
       //   return of([]);
