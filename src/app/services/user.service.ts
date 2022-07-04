@@ -1,7 +1,7 @@
  import { Injectable } from '@angular/core';
- import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable,} from 'rxjs';
-import { map,retry,tap } from 'rxjs/operators';
+ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, of, throwError,} from 'rxjs';
+import { catchError, map,retry,tap } from 'rxjs/operators';
 
 import { User } from '../interfaces/user';
 import { environment } from 'src/environments/environment';
@@ -60,7 +60,21 @@ export class UserService {
   // }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`);
+    return this.http.get<User[]>(`${this.apiUrl}/userssss`)
+    .pipe(
+      // catchError((error: any)=>{
+      //   return of([]);
+      // })
+      catchError(this.handleError)
+
+    );
+  }
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMsg = '';
+    if(error.status === 404) {
+      errorMsg ="Error 404 on server";
+    }
+    return throwError({code:404, message:"Page not Found or File not found error"});
   }
 
   getTextFile(): Observable<string> {
