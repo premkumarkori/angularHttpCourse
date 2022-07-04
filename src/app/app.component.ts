@@ -9,6 +9,8 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit{
   title = 'angularHttpCourse';
+  users!: User[];
+  
   private user: User= {
       'id':1,
       'name': 'Premkumar',
@@ -46,14 +48,18 @@ export class AppComponent implements OnInit{
    // this.onUpdateUser();
    // this.onDeleteUser();
     this.onGetUsers();
+    this.onGetUser();
     //this.onCreateUser();
-    this.onGetTextFile();
+    //this.onGetTextFile();
     
   }
 
   onGetUsers(): void{
     this.userService.getUsers().subscribe(
-      (response) => console.log(response),
+      (response) => {
+        console.log(response)
+        this.users =response;
+      },
       (err:any) => console.log(err),
       () => console.log('Done retreving users')
     )

@@ -2,14 +2,16 @@ import { Address } from "./address";
 import { Company } from "./company";
 
 export interface User {
-    id: number;
+    id?: number;
     name: string;
     username: string;
     email: string;
-    address: Address;
+    isAdmin?: Object;
+    address?: Address;
     phone: string;
+    image?: string;
     website: string;
-    company: Company;
+    company?: Company;
 }
 
   
