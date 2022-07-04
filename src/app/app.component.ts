@@ -44,9 +44,10 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
    // this.onUpdateUser();
-    this.onDeleteUser();
+   // this.onDeleteUser();
     this.onGetUsers();
     //this.onCreateUser();
+    this.onGetTextFile();
     
   }
 
@@ -57,7 +58,13 @@ export class AppComponent implements OnInit{
       () => console.log('Done retreving users')
     )
   }
-
+  onGetTextFile(): void{
+    this.userService.getTextFile().subscribe(
+      (response) => console.log(response),
+      (err:any) => console.log(err),
+      () => console.log('Done retreving textFile')
+    )
+  }
   onGetUser(): void{
     this.userService.getUser().subscribe(
       (response) => console.log(response),
